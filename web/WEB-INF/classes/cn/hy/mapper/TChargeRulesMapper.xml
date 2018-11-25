@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hy.mapper.TChargeRulesMapper" >
+  <resultMap id="BaseResultMap" type="cn.hy.pojo.TChargeRules" >
+    <id column="func_ID" property="funcId" jdbcType="CHAR" />
+    <id column="charge_Code" property="chargeCode" jdbcType="CHAR" />
+    <result column="func_Name" property="funcName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    func_ID, charge_Code, func_Name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hy.pojo.TChargeRulesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_charge_rules
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.hy.pojo.TChargeRulesKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_charge_rules
+    where func_ID = #{funcId,jdbcType=CHAR}
+      and charge_Code = #{chargeCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.hy.pojo.TChargeRulesKey" >
+    delete from t_charge_rules
+    where func_ID = #{funcId,jdbcType=CHAR}
+      and charge_Code = #{chargeCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hy.pojo.TChargeRulesExample" >
+    delete from t_charge_rules
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hy.pojo.TChargeRules" >
+    insert into t_charge_rules (func_ID, charge_Code, func_Name
+      )
+    values (#{funcId,jdbcType=CHAR}, #{chargeCode,jdbcType=CHAR}, #{funcName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hy.pojo.TChargeRules" >
+    insert into t_charge_rules
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="funcId != null" >
+        func_ID,
+      </if>
+      <if test="chargeCode != null" >
+        charge_Code,
+      </if>
+      <if test="funcName != null" >
+        func_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="funcId != null" >
+        #{funcId,jdbcType=CHAR},
+      </if>
+      <if test="chargeCode != null" >
+        #{chargeCode,jdbcType=CHAR},
+      </if>
+      <if test="funcName != null" >
+        #{funcName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hy.pojo.TChargeRulesExample" resultType="java.lang.Integer" >
+    select count(*) from t_charge_rules
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_charge_rules
+    <set >
+      <if test="record.funcId != null" >
+        func_ID = #{record.funcId,jdbcType=CHAR},
+      </if>
+      <if test="record.chargeCode != null" >
+        charge_Code = #{record.chargeCode,jdbcType=CHAR},
+      </if>
+      <if test="record.funcName != null" >
+        func_Name = #{record.funcName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_charge_rules
+    set func_ID = #{record.funcId,jdbcType=CHAR},
+      charge_Code = #{record.chargeCode,jdbcType=CHAR},
+      func_Name = #{record.funcName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hy.pojo.TChargeRules" >
+    update t_charge_rules
+    <set >
+      <if test="funcName != null" >
+        func_Name = #{funcName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where func_ID = #{funcId,jdbcType=CHAR}
+      and charge_Code = #{chargeCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hy.pojo.TChargeRules" >
+    update t_charge_rules
+    set func_Name = #{funcName,jdbcType=VARCHAR}
+    where func_ID = #{funcId,jdbcType=CHAR}
+      and charge_Code = #{chargeCode,jdbcType=CHAR}
+  </update>
+</mapper>

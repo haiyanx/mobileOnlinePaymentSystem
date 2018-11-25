@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hy.mapper.TMobilesMapper" >
+  <resultMap id="BaseResultMap" type="cn.hy.pojo.TMobiles" >
+    <id column="mobile_Number" property="mobileNumber" jdbcType="VARCHAR" />
+    <result column="mobile_Type" property="mobileType" jdbcType="CHAR" />
+    <result column="card_Number" property="cardNumber" jdbcType="VARCHAR" />
+    <result column="is_Available" property="isAvailable" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mobile_Number, mobile_Type, card_Number, is_Available
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hy.pojo.TMobilesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_mobiles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_mobiles
+    where mobile_Number = #{mobileNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_mobiles
+    where mobile_Number = #{mobileNumber,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hy.pojo.TMobilesExample" >
+    delete from t_mobiles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hy.pojo.TMobiles" >
+    insert into t_mobiles (mobile_Number, mobile_Type, card_Number, 
+      is_Available)
+    values (#{mobileNumber,jdbcType=VARCHAR}, #{mobileType,jdbcType=CHAR}, #{cardNumber,jdbcType=VARCHAR}, 
+      #{isAvailable,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hy.pojo.TMobiles" >
+    insert into t_mobiles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mobileNumber != null" >
+        mobile_Number,
+      </if>
+      <if test="mobileType != null" >
+        mobile_Type,
+      </if>
+      <if test="cardNumber != null" >
+        card_Number,
+      </if>
+      <if test="isAvailable != null" >
+        is_Available,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mobileNumber != null" >
+        #{mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileType != null" >
+        #{mobileType,jdbcType=CHAR},
+      </if>
+      <if test="cardNumber != null" >
+        #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvailable != null" >
+        #{isAvailable,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hy.pojo.TMobilesExample" resultType="java.lang.Integer" >
+    select count(*) from t_mobiles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_mobiles
+    <set >
+      <if test="record.mobileNumber != null" >
+        mobile_Number = #{record.mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileType != null" >
+        mobile_Type = #{record.mobileType,jdbcType=CHAR},
+      </if>
+      <if test="record.cardNumber != null" >
+        card_Number = #{record.cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAvailable != null" >
+        is_Available = #{record.isAvailable,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_mobiles
+    set mobile_Number = #{record.mobileNumber,jdbcType=VARCHAR},
+      mobile_Type = #{record.mobileType,jdbcType=CHAR},
+      card_Number = #{record.cardNumber,jdbcType=VARCHAR},
+      is_Available = #{record.isAvailable,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hy.pojo.TMobiles" >
+    update t_mobiles
+    <set >
+      <if test="mobileType != null" >
+        mobile_Type = #{mobileType,jdbcType=CHAR},
+      </if>
+      <if test="cardNumber != null" >
+        card_Number = #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvailable != null" >
+        is_Available = #{isAvailable,jdbcType=CHAR},
+      </if>
+    </set>
+    where mobile_Number = #{mobileNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hy.pojo.TMobiles" >
+    update t_mobiles
+    set mobile_Type = #{mobileType,jdbcType=CHAR},
+      card_Number = #{cardNumber,jdbcType=VARCHAR},
+      is_Available = #{isAvailable,jdbcType=CHAR}
+    where mobile_Number = #{mobileNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

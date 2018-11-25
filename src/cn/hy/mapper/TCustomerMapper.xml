@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hy.mapper.TCustomerMapper" >
+  <resultMap id="BaseResultMap" type="cn.hy.pojo.TCustomer" >
+    <id column="customer_ID" property="customerId" jdbcType="INTEGER" />
+    <result column="ID_Type" property="idType" jdbcType="CHAR" />
+    <result column="ID_Number" property="idNumber" jdbcType="VARCHAR" />
+    <result column="customer_Name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_Birthday" property="customerBirthday" jdbcType="TIMESTAMP" />
+    <result column="customer_Sex" property="customerSex" jdbcType="CHAR" />
+    <result column="customer_Address" property="customerAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_ID, ID_Type, ID_Number, customer_Name, customer_Birthday, customer_Sex, 
+    customer_Address
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hy.pojo.TCustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer
+    where customer_ID = #{customerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_customer
+    where customer_ID = #{customerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hy.pojo.TCustomerExample" >
+    delete from t_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hy.pojo.TCustomer" >
+    insert into t_customer (customer_ID, ID_Type, ID_Number, 
+      customer_Name, customer_Birthday, customer_Sex, 
+      customer_Address)
+    values (#{customerId,jdbcType=INTEGER}, #{idType,jdbcType=CHAR}, #{idNumber,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{customerBirthday,jdbcType=TIMESTAMP}, #{customerSex,jdbcType=CHAR}, 
+      #{customerAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hy.pojo.TCustomer" >
+    insert into t_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_ID,
+      </if>
+      <if test="idType != null" >
+        ID_Type,
+      </if>
+      <if test="idNumber != null" >
+        ID_Number,
+      </if>
+      <if test="customerName != null" >
+        customer_Name,
+      </if>
+      <if test="customerBirthday != null" >
+        customer_Birthday,
+      </if>
+      <if test="customerSex != null" >
+        customer_Sex,
+      </if>
+      <if test="customerAddress != null" >
+        customer_Address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerBirthday != null" >
+        #{customerBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerSex != null" >
+        #{customerSex,jdbcType=CHAR},
+      </if>
+      <if test="customerAddress != null" >
+        #{customerAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hy.pojo.TCustomerExample" resultType="java.lang.Integer" >
+    select count(*) from t_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_customer
+    <set >
+      <if test="record.customerId != null" >
+        customer_ID = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.idType != null" >
+        ID_Type = #{record.idType,jdbcType=CHAR},
+      </if>
+      <if test="record.idNumber != null" >
+        ID_Number = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null" >
+        customer_Name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerBirthday != null" >
+        customer_Birthday = #{record.customerBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customerSex != null" >
+        customer_Sex = #{record.customerSex,jdbcType=CHAR},
+      </if>
+      <if test="record.customerAddress != null" >
+        customer_Address = #{record.customerAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_customer
+    set customer_ID = #{record.customerId,jdbcType=INTEGER},
+      ID_Type = #{record.idType,jdbcType=CHAR},
+      ID_Number = #{record.idNumber,jdbcType=VARCHAR},
+      customer_Name = #{record.customerName,jdbcType=VARCHAR},
+      customer_Birthday = #{record.customerBirthday,jdbcType=TIMESTAMP},
+      customer_Sex = #{record.customerSex,jdbcType=CHAR},
+      customer_Address = #{record.customerAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hy.pojo.TCustomer" >
+    update t_customer
+    <set >
+      <if test="idType != null" >
+        ID_Type = #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        ID_Number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_Name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerBirthday != null" >
+        customer_Birthday = #{customerBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerSex != null" >
+        customer_Sex = #{customerSex,jdbcType=CHAR},
+      </if>
+      <if test="customerAddress != null" >
+        customer_Address = #{customerAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_ID = #{customerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hy.pojo.TCustomer" >
+    update t_customer
+    set ID_Type = #{idType,jdbcType=CHAR},
+      ID_Number = #{idNumber,jdbcType=VARCHAR},
+      customer_Name = #{customerName,jdbcType=VARCHAR},
+      customer_Birthday = #{customerBirthday,jdbcType=TIMESTAMP},
+      customer_Sex = #{customerSex,jdbcType=CHAR},
+      customer_Address = #{customerAddress,jdbcType=VARCHAR}
+    where customer_ID = #{customerId,jdbcType=INTEGER}
+  </update>
+</mapper>
