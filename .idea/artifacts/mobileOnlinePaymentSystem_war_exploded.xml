@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="mobileOnlinePaymentSystem:war exploded">
+    <output-path>D:/java/apache-tomcat-8.5.32/webapps/mobileOnlinePaymentSystem</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="mobileOnlinePaymentSystem/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="mobileOnlinePaymentSystem" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
