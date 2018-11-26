@@ -39,5 +39,14 @@
         <url-pattern>/addResources</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>test</servlet-name>
+        <jsp-file>/WEB-INF/html/test123.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test123</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

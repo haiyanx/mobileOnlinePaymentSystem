@@ -11,6 +11,10 @@
 <head>
     <title>addResources</title>
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <%
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    %>
 </head>
 <body style="position: relative">
 <div style="border-bottom: 2px solid #283132">您现在的位置: >>新增资源</div>
@@ -48,7 +52,7 @@
     </form>
     <p>说明:1.只支持txt文档导入！</p>
     <p>2.请在导入文档的第一行注明号码类型位SIM或UIM！</p>
-    <p><a href="">3.查看示例</a></p>
+    <p><a href="<%=basePath%>test123" target="_top">3.查看示例</a></p>
 </div>
 
 </body>
