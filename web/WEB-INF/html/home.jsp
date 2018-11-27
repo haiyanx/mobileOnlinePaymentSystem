@@ -54,12 +54,12 @@
                             </a>
                         </dd>
                         <dd class="">
-                            <a href="javascript:;" _href="Warning_management.html">
+                            <a href="javascript:;" _href="#">
                                 <cite>扩展功能一</cite>
                             </a>
                         </dd>
                         <dd class="">
-                            <a href="javascript:;" _href="Warning_management.html">
+                            <a href="javascript:;" _href="#">
                                 <cite>扩展功能二</cite>
                             </a>
                         </dd>
@@ -78,7 +78,7 @@
                             </a>
                         </dd>
                         <dd class="">
-                            <a href="javascript:;" _href="Warning_management.html">
+                            <a href="javascript:;" _href="#">
                                 <cite>扩展功能</cite>
                             </a>
                         </dd>
@@ -91,12 +91,12 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd class="">
-                            <a href="javascript:;" _href="<%=basePath%>test">
+                            <a href="javascript:;" _href="<%=basePath%>/chargeServlet?method=queryChargeList">
                                 <cite>配置业务</cite>
                             </a>
                         </dd>
                         <dd class="">
-                            <a href="javascript:;" _href="Warning_management.html">
+                            <a href="javascript:;" _href="#">
                                 <cite>扩展功能</cite>
                             </a>
                         </dd>

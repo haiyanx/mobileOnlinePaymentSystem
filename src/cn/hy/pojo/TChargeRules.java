@@ -10,4 +10,5 @@ public class TChargeRules extends TChargeRulesKey {
     public void setFuncName(String funcName) {
         this.funcName = funcName == null ? null : funcName.trim();
     }
+
 }

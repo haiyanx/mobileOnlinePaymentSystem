@@ -30,4 +30,13 @@ public class TCharge {
     public void setCharge(Double charge) {
         this.charge = charge;
     }
+
+    @Override
+    public String toString() {
+        return "TCharge{" +
+                "chargeCode='" + chargeCode + '\'' +
+                ", chargeName='" + chargeName + '\'' +
+                ", charge=" + charge +
+                '}';
+    }
 }
