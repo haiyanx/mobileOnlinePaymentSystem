@@ -1,7 +1,7 @@
 package cn.hy.web.servlet;
 import cn.hy.service.TMobilesService;
 import cn.hy.utiles.BaseServlet;
-import org.apache.commons.fileupload.FileItem;
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
