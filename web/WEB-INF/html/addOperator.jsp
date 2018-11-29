@@ -16,20 +16,20 @@
 <body style="position: relative">
 <div style="border-bottom: 2px solid #283132">您现在的位置: >>新增操作员</div>
 
-<div style="color: red">${addOperator}</div>
+<div style="color: red" id="messge"></div>
 
-<form action="<c:url value="/operatorServlet?method=addOperator"/>" method="post">
+<form id="_form">
     <table border="1px" style="position: absolute;top: 100px;left: 200px;">
         <tr>
             <th width="200px">登陆ID：</th>
             <th width="300px">
-                <input type="text" name="operatorId" width="100px" id="uname"/> *至少四位字母
+                <input type="text" name="operatorId" width="100px" id="uname1"/> *至少四位字母
             </th>
         </tr>
         <tr>
             <th>姓名：</th>
             <th>
-                <input type="text" name="operatorName" width="100px" /> *不超过20位
+                <input type="text" name="operatorName" width="100px" id="uname2" /> *不超过20位
             </th>
         </tr>
         <tr>
@@ -54,13 +54,42 @@
     </table>
 
     <div style="position: absolute;left: 38%;top: 300px">
-        <input type="submit" value="提交">
+        <input type="button" id="addOpe" onclick="addOperator()" value="提交">
         <input type="reset" value="全部重写">
     </div>
 
 </form>
 </body>
 <script>
+    function addOperator() {
+        var operatorId = $("input[name='operatorId']").val();
+        var operatorName = $("input[name='operatorName']").val();
+        var operatorPwd = $("input[name='operatorPwd']").val();
+        var isAdmin = $("input[name='isAdmin']").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "${pageContext.request.contextPath}/operatorController/addOperator.action" ,
+            data: JSON.stringify({
+                "operatorId":operatorId,
+                "operatorName":operatorName,
+                "operatorPwd":operatorPwd,
+                "isAdmin":isAdmin
+            }),
+            contentType:"application/json;charset=utf-8",
+            success:function (data) {
+                if(data.result == "yes"){
+                    $("#messge").html("登录ID可以使用！");
+                    $("#messge").css("color","red");
+                }else {
+                    $("#messge").html("登录ID已被占用！");
+                    $("#messge").css("color","red");
+                }
+            }
+        })
+
+    }
+
     $(function () {
         // 判断用户名输入是否规范
         $("#uname").blur(function () {

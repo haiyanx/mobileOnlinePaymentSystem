@@ -14,44 +14,84 @@
         String path = request.getContextPath();
         String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     %>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 </head>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/operatorController/queryOperatorList.action" ,
+            contentType:"application/json;charset=utf-8",
+            dataType:"json",
+            success:function(data){
+                $("#_tab tbody").empty();
+                if(data.length != 0){
+                    var list = data.length;
+                    for(var index = 0; index < list;index++){
+                        $("#_tab tbody").append("<tr><td><input type=\"checkbox\" name=\"isChecked\" value='"+data[index].operatorId+"'></td>" +
+                            "<td>"+data[index].operatorId+"</td>" +
+                            "<td>"+data[index].operatorName+"</td>" +
+                            "<td>"+data[index].isAdmin+"</td>" +
+                            "<td><a href='#' onclick='queryOperators(" +data[index].operatorId+
+                            ")'>修改</a></td></tr>");
+                    }
+                }
+            }
+        })
+    });
+    function queryOperators(opeId) {
+        <%--$.ajax({--%>
+        <%--type: "GET",--%>
+        <%--url: "${pageContext.request.contextPath}/operatorController/queryOperatorList.action" ,--%>
+        <%--contentType:"application/json;charset=utf-8",--%>
+        <%--dataType:"json",--%>
+        <%--});--%>
+        alert(opeId);
+    }
+
+</script>
 <body style="position: relative">
 <div style="border-bottom: 2px solid #283132">您现在的位置: >>操作员列表</div>
 
-<form action="<%=basePath%>/operatorServlet?method=likeQuery" method="post" style="position: absolute;top: 50px;left: 20%">
+<form id="_form" style="position: absolute;top: 50px;left: 20%">
     操作员姓名：<input type="text" name="operator_Name" width="50px"/>
     操作员编号：<input type="text" name="operator_ID" width="50px"/>
     <input type="submit" value="立即提交">
 </form>
 <div style="color: red;position: absolute;top: 80px;left: 25%;" >${nullOperators}</div>
 <form action="<%=basePath%>/operatorServlet?method=deleterOperatoes" method="post" onsubmit="return checked()" style="position: absolute;top: 100px;left: 20%;">
-    <table border="1px">
-        <tr>
-            <th width="50px">选中</th>
-            <th width="50px">编号</th>
-            <th width="50px">姓名</th>
-            <th width="50px">权限</th>
-            <th width="50px">操作</th>
-        </tr>
-        <c:forEach var="operator" items="${operatorList}">
+    <table border="1px" id="_tab">
+        <thead>
             <tr>
-                <th>
-                    <input type="checkbox" name="isChecked" value="${operator.operatorId}">
-                </th>
-                <th>
-                        ${operator.operatorId}
-                </th>
-                <th>
-                        ${operator.operatorName}
-                </th>
-                <th>
-                        ${operator.isAdmin}
-                </th>
-                <th>
-                    <a href="<%=basePath%>/operatorServlet?method=queryOperators&checkId=${operator.operatorId}">修改</a>
-                </th>
+                <th width="50px">选中</th>
+                <th width="50px">编号</th>
+                <th width="50px">姓名</th>
+                <th width="50px">权限</th>
+                <th width="50px">操作</th>
             </tr>
-        </c:forEach>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <%--<c:forEach var="operator" items="${operatorList}">--%>
+            <%--<tr>--%>
+                <%--<th>--%>
+                    <%--<input type="checkbox" name="isChecked" value="${operator.operatorId}">--%>
+                <%--</th>--%>
+                <%--<th>--%>
+                        <%--${operator.operatorId}--%>
+                <%--</th>--%>
+                <%--<th>--%>
+                        <%--${operator.operatorName}--%>
+                <%--</th>--%>
+                <%--<th>--%>
+                        <%--${operator.isAdmin}--%>
+                <%--</th>--%>
+                <%--<th>--%>
+                    <%--<a href="<%=basePath%>/operatorServlet?method=queryOperators&checkId=${operator.operatorId}">修改</a>--%>
+                <%--</th>--%>
+            <%--</tr>--%>
+        <%--</c:forEach>--%>
     </table>
     <div style="color: red;position: absolute;top: 250px;left: 25%;" >${deleOperas}</div>
     <input type="submit" value="立即删除" style="position: absolute;left: 25%;top: 300px"/>
@@ -69,7 +109,7 @@
             }
         }
         if(!isok) {
-            alert("请选择要删除的操作员！")
+            alert("请选择要删除的操作员！");
             return false;
 
         }else{

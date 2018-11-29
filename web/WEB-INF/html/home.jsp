@@ -49,7 +49,7 @@
                             </a>
                         </dd>
                         <dd class="">
-                            <a href="javascript:;" _href="<%=basePath%>/operatorServlet?method=queryOperatorList">
+                            <a href="javascript:;" _href="<%=basePath%>operators">
                                 <cite>操作员列表</cite>
                             </a>
                         </dd>

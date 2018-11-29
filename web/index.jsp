@@ -17,6 +17,7 @@
   <title>登录</title>
   <link rel="stylesheet" href="lib/layui/css/layui.css" media="all" />
   <link rel="stylesheet" href="css/login.css" />
+  <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 </head>
 
 <body class="beg-login-bg" >
@@ -26,7 +27,8 @@
   </header>
   <div class="beg-login-main">
     <div style="color: red">${msg}</div>
-    <form action="<c:url value="/operatorServlet?method=login" />" class="layui-form" method="post">
+    <div style="color: red">${codeMessage}</div>
+    <form class="layui-form" id="_form">
       <div class="layui-form-item">
         <label class="beg-login-icon">
           <i class="layui-icon">&#xe612;</i>
@@ -49,7 +51,7 @@
       </div>
       <div class="layui-form-item">
         <div class="beg-pull-left">
-          <button class="layui-btn layui-btn-primary" type="submit">
+          <button class="layui-btn layui-btn-primary" id="_button" type="button" onclick="login()" >
             登录
           </button>
         </div>
@@ -70,6 +72,44 @@
         document.getElementById("validateCodeImg").src = "imageServlet?"+Math.random();
     }
 
+    function login(){
+        var code = $("#validateCode").val();
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "${pageContext.request.contextPath}/operatorController/code.action" ,
+            data: "code="+code,
+            contentType:"application/json;charset=utf-8",
+            success: function (data) {
+                var vcode = data.toString();
+                if(vcode == code) {
+                    checkNum();
+                }else {
+                    alert("验证码输入错误！")
+                }
+            }
+        })
+    }
+
+    function checkNum(){
+        var operatorID = $("#uname").val();
+        var operatorPwd =$("#pass_word1").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "${pageContext.request.contextPath}/operatorController/login.action" ,
+            data: JSON.stringify({
+                "operatorId":operatorID,
+                "operatorPwd":operatorPwd
+            }),
+            contentType:"application/json;charset=utf-8",
+            success:function (data) {
+              if(data.result == "1") window.location.href="${pageContext.request.contextPath}/home";
+              else alert(data.result);
+            }
+        })
+    }
+
     $(function () {
         $("#uname").blur(function () {
             var name = $(this).val().trim();
@@ -85,6 +125,7 @@
                 alert("密码不能为空")
             }
         });
+
     })
 </script>
 </body>

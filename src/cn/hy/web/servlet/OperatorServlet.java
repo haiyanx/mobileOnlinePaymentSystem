@@ -6,32 +6,33 @@ import cn.hy.service.TOperatorService;
 import cn.hy.utiles.BaseServlet;
 
 import cn.hy.utiles.CommonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
+@Controller
 @WebServlet("/operatorServlet")
 public class OperatorServlet extends BaseServlet {
+    @Autowired
+    private TOperatorService tOperatorService;
 
-    private ApplicationContext applicationContext =
-            new ClassPathXmlApplicationContext("classpath:applicationContext-*.xml");
-    private TOperatorService tOperatorService = applicationContext.getBean(TOperatorService.class);
-
-    public String login(HttpServletRequest request, HttpServletResponse response) {
-        /**
-         * vcode验证码的值
-         * code页面输入的验证码的值
-         * operator_id页面输入的用户id
-         * operator_pwd页面输入的用户密码
-         */
+//    public String login(HttpServletRequest request, HttpServletResponse response) {
+//        /**
+//         * vcode验证码的值
+//         * code页面输入的验证码的值
+//         * operator_id页面输入的用户id
+//         * operator_pwd页面输入的用户密码
+//         */
 //        String vcode = (String) request.getSession().getAttribute("checkCode");
 //        String code = request.getParameter("validateCode");
 //        String operator_id = request.getParameter("operator_ID");
 //        String operator_pwd = request.getParameter("operator_Pwd");
+//        System.out.println("====================");
 //
 //        if(!vcode.equals(code)){
 //            request.getSession().setAttribute("msg", "验证码不一致");
@@ -51,34 +52,34 @@ public class OperatorServlet extends BaseServlet {
 //                    }else {
 //                        request.getSession().setAttribute("adminName", "操作员");
 //                    }
-//                    return "f:/WEB-INF/html/home.jsp";
+//                    return "f:/home.jsp";
 //                }else {
 //                    request.getSession().setAttribute("msg", "密码错误");
 //                    return "f:/index.jsp";
 //                }
 //            }
 //        }
-        return "f:/WEB-INF/html/home.jsp";
-    }
+////        return "f:/WEB-INF/html/home.jsp";
+//    }
 
-    public String addOperator(HttpServletRequest request, HttpServletResponse response){
+//    public String addOperator(HttpServletRequest request, HttpServletResponse response){
+//
+//        TOperator tuser = CommonUtils.toBean(request.getParameterMap(), TOperator.class);
+//        boolean isok = tOperatorService.insertOperator(tuser);
+//        if (isok) {
+//            request.getSession().setAttribute("addOperator", "登录ID可以使用！");
+//            return "f:/WEB-INF/html/addOperator.jsp";
+//        }else {
+//            request.getSession().setAttribute("addOperator", "登录ID已被占用");
+//            return "f:/WEB-INF/html/addOperator.jsp";
+//        }
+//    }
 
-        TOperator tuser = CommonUtils.toBean(request.getParameterMap(), TOperator.class);
-        boolean isok = tOperatorService.insertOperator(tuser);
-        if (isok) {
-            request.getSession().setAttribute("addOperator", "登录ID可以使用！");
-            return "f:/WEB-INF/html/addOperator.jsp";
-        }else {
-            request.getSession().setAttribute("addOperator", "登录ID已被占用");
-            return "f:/WEB-INF/html/addOperator.jsp";
-        }
-    }
-
-    public String queryOperatorList (HttpServletRequest request, HttpServletResponse response) {
-        List<TOperator> operatorList = tOperatorService.queryOperatorList();
-        request.getSession().setAttribute("operatorList", operatorList);
-        return "f:/WEB-INF/html/operators.jsp";
-    }
+//    public String queryOperatorList (HttpServletRequest request, HttpServletResponse response) {
+//        List<TOperator> operatorList = tOperatorService.queryOperatorList();
+//        request.getSession().setAttribute("operatorList", operatorList);
+//        return "f:/WEB-INF/html/operators.jsp";
+//    }
 
     public String likeQuery(HttpServletRequest request, HttpServletResponse response){
         String operator_name = request.getParameter("operator_Name");

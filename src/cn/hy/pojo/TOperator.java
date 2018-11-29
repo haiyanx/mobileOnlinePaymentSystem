@@ -1,8 +1,11 @@
 package cn.hy.pojo;
 
-public class TOperator {
-    private String operatorId;
+import javax.validation.constraints.Size;
 
+public class TOperator {
+    @Size(min = 1,max = 13,message = "{TOperator.operatorId.error.size}")
+    private String operatorId;
+    @Size(min = 1,max = 13,message = "{TOperator.operatorPwd.error.size}")
     private String operatorName;
 
     private String operatorPwd;
