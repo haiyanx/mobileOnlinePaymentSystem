@@ -49,7 +49,7 @@
                             </a>
                         </dd>
                         <dd class="">
-                            <a href="javascript:;" _href="<%=basePath%>operators">
+                            <a href="javascript:;" _href="<%=basePath%>/operatorController/queryOperatorList.action">
                                 <cite>操作员列表</cite>
                             </a>
                         </dd>
@@ -91,7 +91,7 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd class="">
-                            <a href="javascript:;" _href="<%=basePath%>/chargeServlet?method=queryChargeList">
+                            <a href="javascript:;" _href="<%=basePath%>serviceConfig">
                                 <cite>配置业务</cite>
                             </a>
                         </dd>

@@ -81,50 +81,50 @@ public class OperatorServlet extends BaseServlet {
 //        return "f:/WEB-INF/html/operators.jsp";
 //    }
 
-    public String likeQuery(HttpServletRequest request, HttpServletResponse response){
-        String operator_name = request.getParameter("operator_Name");
-        String operator_id = request.getParameter("operator_ID");
-        List<TOperator> likeOperators = tOperatorService.likeQuery(operator_name,operator_id);
-        if(likeOperators==null || likeOperators.size()==0){
-            request.getSession().setAttribute("nullOperators", "没有找到适合条件的操作员");
-            request.getSession().setAttribute("operatorList", "");
-            return "f:/WEB-INF/html/operators.jsp";
-        }else{
-            request.getSession().setAttribute("nullOperators", "");
-            request.getSession().setAttribute("operatorList", likeOperators);
-            return "f:/WEB-INF/html/operators.jsp";
-        }
-    }
+//    public String likeQuery(HttpServletRequest request, HttpServletResponse response){
+//        String operator_name = request.getParameter("operator_Name");
+//        String operator_id = request.getParameter("operator_ID");
+//        List<TOperator> likeOperators = tOperatorService.likeQuery(operator_name,operator_id);
+//        if(likeOperators==null || likeOperators.size()==0){
+//            request.getSession().setAttribute("nullOperators", "没有找到适合条件的操作员");
+//            request.getSession().setAttribute("operatorList", "");
+//            return "f:/WEB-INF/html/operators.jsp";
+//        }else{
+//            request.getSession().setAttribute("nullOperators", "");
+//            request.getSession().setAttribute("operatorList", likeOperators);
+//            return "f:/WEB-INF/html/operators.jsp";
+//        }
+//    }
 
-    public String deleterOperatoes(HttpServletRequest request, HttpServletResponse response) {
-        String[] items = request.getParameterValues("isChecked");
-        int deleteCount = tOperatorService.deleterOperators(items);
-        List<TOperator> operatorList = tOperatorService.queryOperatorList();
-        if (deleteCount == items.length) {
-            request.getSession().setAttribute("deleOperas", "删除成功"+deleteCount+"条记录");
-            request.getSession().setAttribute("operatorList", operatorList);
-            return "f:/WEB-INF/html/operators.jsp";
-        }else {
-            request.getSession().setAttribute("deleOperas", "请选择需要删除的操作员");
-            request.getSession().setAttribute("operatorList", operatorList);
-            return "f:/WEB-INF/html/operators.jsp";
-        }
-    }
+//    public String deleterOperatoes(HttpServletRequest request, HttpServletResponse response) {
+//        String[] items = request.getParameterValues("isChecked");
+//        int deleteCount = tOperatorService.deleterOperators(items);
+//        List<TOperator> operatorList = tOperatorService.queryOperatorList();
+//        if (deleteCount == items.length) {
+//            request.getSession().setAttribute("deleOperas", "删除成功"+deleteCount+"条记录");
+//            request.getSession().setAttribute("operatorList", operatorList);
+//            return "f:/WEB-INF/html/operators.jsp";
+//        }else {
+//            request.getSession().setAttribute("deleOperas", "请选择需要删除的操作员");
+//            request.getSession().setAttribute("operatorList", operatorList);
+//            return "f:/WEB-INF/html/operators.jsp";
+//        }
+//    }
 
-    public String queryOperators(HttpServletRequest request, HttpServletResponse response){
-        String checkOperator = request.getParameter("checkId");
-        TOperator operator = tOperatorService.queryOneOperator(checkOperator);
-        request.getSession().setAttribute("checkOperator", operator);
-        request.getSession().setAttribute("checkedId",checkOperator);
-        return "f:/WEB-INF/html/update.jsp";
-    }
+//    public String queryOperators(HttpServletRequest request, HttpServletResponse response){
+//        String checkOperator = request.getParameter("checkId");
+//        TOperator operator = tOperatorService.queryOneOperator(checkOperator);
+//        request.getSession().setAttribute("checkOperator", operator);
+//        request.getSession().setAttribute("checkedId",checkOperator);
+//        return "f:/WEB-INF/html/update.jsp";
+//    }
 
-    public String updateOperator(HttpServletRequest request, HttpServletResponse response){
-        String checkedId = (String) request.getSession().getAttribute("checkedId");
-        TOperator operator = CommonUtils.toBean(request.getParameterMap(), TOperator.class);
-        tOperatorService.updateOperator(operator,checkedId);
-        List<TOperator> operatorList = tOperatorService.queryOperatorList();
-        request.getSession().setAttribute("operatorList", operatorList);
-        return "f:/WEB-INF/html/operators.jsp";
-    }
+//    public String updateOperator(HttpServletRequest request, HttpServletResponse response){
+//        String checkedId = (String) request.getSession().getAttribute("checkedId");
+//        TOperator operator = CommonUtils.toBean(request.getParameterMap(), TOperator.class);
+//        tOperatorService.updateOperator(operator,checkedId);
+//        List<TOperator> operatorList = tOperatorService.queryOperatorList();
+//        request.getSession().setAttribute("operatorList", operatorList);
+//        return "f:/WEB-INF/html/operators.jsp";
+//    }
 }

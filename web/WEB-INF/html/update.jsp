@@ -16,7 +16,7 @@
 </head>
 <body style="position: relative">
 <div style="border-bottom: 2px solid #283132">您现在的位置: >>操作员列表2-修改操作员信息</div>
-<form action="<%=basePath%>/operatorServlet?method=updateOperator" method="post">
+<form action="<%=basePath%>/operatorController/updateOperator.action" method="post">
     <table border="1px" style="position: absolute;top: 100px;left: 200px;">
         <tr>
             <th width="200px">登陆ID：</th>

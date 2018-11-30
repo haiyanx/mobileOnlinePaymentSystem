@@ -16,10 +16,11 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
+    <!--开启组件扫描 -->
     <context:component-scan base-package="cn.hy.web" />
+    <!--注解方式开发 -->
     <mvc:annotation-driven validator="validator" conversion-service="conversionService"/>
-
+    <!--转换服务 -->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
@@ -43,9 +44,9 @@
         <property name="fileEncodings" value="utf-8"/>
     </bean>
 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="5242880" />
-    </bean>
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="maxUploadSize" value="5242880" />-->
+    <!--</bean>-->
 
     <bean class="cn.hy.utiles.CustomHandlerExceptionResolver" />
 

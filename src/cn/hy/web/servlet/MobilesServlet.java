@@ -27,7 +27,6 @@ public class MobilesServlet extends BaseServlet {
 
     public String addResources(HttpServletRequest request, HttpServletResponse response) {
         String mobileType = request.getParameter("mobileType");
-        System.out.println(mobileType);
         String numberFrom = request.getParameter("numberFrom");
         String numberTo = request.getParameter("numberTo");
         long from = Long.parseLong(numberFrom);
@@ -42,40 +41,40 @@ public class MobilesServlet extends BaseServlet {
         }
     }
 
-    public String addTxtResources(HttpServletRequest request, HttpServletResponse response) {
-        List<String> olist = new ArrayList<>();
-        try{
-            if(ServletFileUpload.isMultipartContent(request)) {
-                DiskFileItemFactory dff=new DiskFileItemFactory();// 创建该对象
-                dff.setSizeThreshold(1024000);// 指定在内存中缓存数据大小,单位为byte
-                ServletFileUpload sfu=new ServletFileUpload(dff);// 创建该对象
-                sfu.setFileSizeMax(5000000);// 指定单个上传文件的最大尺寸
-                sfu.setSizeMax(10000000);// 指定一次上传多个文件的 总尺寸
-                FileItemIterator fii=sfu.getItemIterator(request);// 解析request 请求,并返回FileItemIterator集合
-                while(fii.hasNext()) {
-                    FileItemStream fis=fii.next();// 从集合中获得一个文件流
-                    if(!fis.isFormField() && fis.getName().length() > 0) {// 过滤掉表单中非文件
-                        BufferedInputStream in=new BufferedInputStream(fis.openStream());// 获得文件输入流
-                        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(in));
-                        String lineTxt=null;
-                        while((lineTxt=bufferedReader.readLine()) != null) {
-                            olist.add(lineTxt);
-                        }
-                        bufferedReader.close();
-                    }
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        int count = tMobilesService.addTxtResources(olist);
-        if(count!=0){
-            request.getSession().setAttribute("numError", "导入成功"+count+"条资源");
-            return "f:/WEB-INF/html/addResources.jsp";
-        }else {
-            request.getSession().setAttribute("numError", "导入失败，文件格式不匹配");
-            return "f:/WEB-INF/html/addResources.jsp";
-        }
-    }
+//    public String addTxtResources(HttpServletRequest request, HttpServletResponse response) {
+//        List<String> olist = new ArrayList<>();
+//        try{
+//            if(ServletFileUpload.isMultipartContent(request)) {
+//                DiskFileItemFactory dff=new DiskFileItemFactory();// 创建该对象
+//                dff.setSizeThreshold(1024000);// 指定在内存中缓存数据大小,单位为byte
+//                ServletFileUpload sfu=new ServletFileUpload(dff);// 创建该对象
+//                sfu.setFileSizeMax(5000000);// 指定单个上传文件的最大尺寸
+//                sfu.setSizeMax(10000000);// 指定一次上传多个文件的 总尺寸
+//                FileItemIterator fii=sfu.getItemIterator(request);// 解析request 请求,并返回FileItemIterator集合
+//                while(fii.hasNext()) {
+//                    FileItemStream fis=fii.next();// 从集合中获得一个文件流
+//                    if(!fis.isFormField() && fis.getName().length() > 0) {// 过滤掉表单中非文件
+//                        BufferedInputStream in=new BufferedInputStream(fis.openStream());// 获得文件输入流
+//                        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(in));
+//                        String lineTxt=null;
+//                        while((lineTxt=bufferedReader.readLine()) != null) {
+//                            olist.add(lineTxt);
+//                        }
+//                        bufferedReader.close();
+//                    }
+//                }
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        int count = tMobilesService.addTxtResources(olist);
+//        if(count!=0){
+//            request.getSession().setAttribute("numError", "导入成功"+count+"条资源");
+//            return "f:/WEB-INF/html/addResources.jsp";
+//        }else {
+//            request.getSession().setAttribute("numError", "导入失败，文件格式不匹配");
+//            return "f:/WEB-INF/html/addResources.jsp";
+//        }
+//    }
 
 }

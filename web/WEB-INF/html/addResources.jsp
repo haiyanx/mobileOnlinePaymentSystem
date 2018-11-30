@@ -10,11 +10,11 @@
 <html>
 <head>
     <title>addResources</title>
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <%
         String path = request.getContextPath();
         String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     %>
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-1.8.3.min.js"></script>
 </head>
 <body style="position: relative">
 <div style="border-bottom: 2px solid #283132">您现在的位置: >>新增资源</div>
@@ -22,7 +22,7 @@
 <div style="color: red">${numError}</div>
 
 <div style="border-bottom: 2px solid #283132;position: absolute;top: 40px;height: 150px;width: 100%">
-    <form action="<c:url value="/mobilesServlet?method=addResources"/>" method="post" style="height: 280px">
+    <form action="${pageContext.request.contextPath}/mobilesController/addResources.action" method="post" style="height: 280px">
         <table>
             <tr style="height: 50px">
                 <td>号码类型：</td>
@@ -44,7 +44,7 @@
     </form>
 </div>
 <div style="position: absolute;top: 230px;height: 150px;width: 100%">
-    <form action="<c:url value="/mobilesServlet?method=addTxtResources"/>" method="post" name="f_upload" enctype="multipart/form-data" style="height: 80px">
+    <form action="${pageContext.request.contextPath}/mobilesController/addTxtResources.action" method="post" name="f_upload" enctype="multipart/form-data" style="height: 80px">
         从制定文件中导入：
         <input type="file" name="filename" value="浏览.."/><br/>
         <input type="submit" value="提交">

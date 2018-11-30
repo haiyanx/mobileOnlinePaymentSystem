@@ -91,6 +91,7 @@
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>operators</servlet-name>
         <jsp-file>/WEB-INF/html/operators.jsp</jsp-file>
@@ -98,6 +99,15 @@
     <servlet-mapping>
         <servlet-name>operators</servlet-name>
         <url-pattern>/operators</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>serviceConfig</servlet-name>
+        <jsp-file>/WEB-INF/html/serviceConfig.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>serviceConfig</servlet-name>
+        <url-pattern>/serviceConfig</url-pattern>
     </servlet-mapping>
 
 </web-app>
